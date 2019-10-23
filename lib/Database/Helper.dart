@@ -52,14 +52,6 @@ class DatabaseHelper {
         await cdb.rawQuery('select count(*) from $table where did = 1'));
   }
 
-  Future<Todo> getTodo(int id) async {
-    var cdb = await db;
-    String cmd = 'select * from $table where id = $id';
-    var res = await cdb.rawQuery(cmd);
-
-    if (res.length == 0) return null;
-    return new Todo.fromMap(res.first);
-  }
 
   Future<int> deleteTodo(int id) async {
     var dbClient = await db;
@@ -82,7 +74,6 @@ class DatabaseHelper {
     bloc.fetchAllTodos();
     bloc.fetchCount();
     return res;
-    //return dbClient.rawUpdate('UPDATE $table SET  $columnDid WHERE id = ?',[todo['did'],todo['id']]);
   }
 
   Future<void> close() async {
